@@ -13,16 +13,16 @@
   }
 
   input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     font-size: 16px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
 
-    @include for-tablet-up {
-      width: 60%;
-      margin-bottom: 0;
-      margin-right: 10px;
-    }
+    // @include for-tablet-up {
+    //   width: 60%;
+    //   margin-bottom: 0;
+    //   margin-right: 10px;
+    // }
   }
 
   button {
@@ -34,9 +34,9 @@
     border: none;
     cursor: pointer;
 
-    @include for-tablet-up {
-      width: auto;
-    }
+    // @include for-tablet-up {
+    //   width: auto;
+    // }
 
     &:hover {
       background-color: darken($primary-color, 10%);
