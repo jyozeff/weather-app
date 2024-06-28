@@ -8,9 +8,7 @@ async function handleResponse(res: Response) {
   const json = await res.json();
 
   if (!res.ok) {
-    throw new Error(
-      json?.errors?.map((e: any) => e.message).join("\n") ?? "unknown error"
-    );
+    throw new Error(json?.cod + ": " + json?.message);
   }
 
   return json;
