@@ -19,7 +19,9 @@ const WeatherForm: React.FC<WeatherFormProps> = ({
     <input
       type="text"
       value={city}
-      onChange={(e) => onCityChange(e.target.value)}
+      onChange={(e) => {
+        onCityChange(e.target.value);
+      }}
       placeholder="Enter city name"
       required
     />

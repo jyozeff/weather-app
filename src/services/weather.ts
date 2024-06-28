@@ -18,6 +18,7 @@ export async function getWeather(
   latitue: number,
   longitue: number
 ): Promise<WeatherReport> {
+  console.log("API call to OpenWeather!");
   const res = await fetch(
     `${WEATHER_BASE_URL}?lat=${latitue}&lon=${longitue}&units=metric&appid=${WEATHER_API_KEY}`
   );
@@ -26,6 +27,7 @@ export async function getWeather(
 }
 
 export async function geocode(city: string): Promise<GeocodeResponse[]> {
+  console.log("API call to OpenWeather!");
   const res = await fetch(
     `${GEOCODE_BASE_URL}?q=${city}&appid=${WEATHER_API_KEY}`
   );

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { geocode, getWeather } from "../services/weather";
 import WeatherDisplay from "../components/WeatherDisplay";
 import WeatherForm from "../components/WeatherForm";
+import { useDebouncedCallback } from "use-debounce";
 
 const WeatherContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");
@@ -11,8 +12,11 @@ const WeatherContainer: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
 
+  const handleCityChangeDebounced = useDebouncedCallback((value: string) => {
+    handleCityChange(value);
+  }, 1000);
+
   const handleCityChange = async (newCity: string) => {
-    setCity(newCity);
     if (newCity.length > 2) {
       try {
         const fetchedLocations = await geocode(newCity);
@@ -54,7 +58,10 @@ const WeatherContainer: React.FC = () => {
       <WeatherForm
         city={city}
         locations={locations}
-        onCityChange={handleCityChange}
+        onCityChange={(s: string) => {
+          setCity(s);
+          handleCityChangeDebounced(s);
+        }}
         onLocationSelect={handleLocationSelect}
         onSubmit={handleSubmit}
       />
