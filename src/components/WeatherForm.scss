@@ -1,3 +1,6 @@
+@import "../variables";
+@import "../mixins";
+
 .weather-form {
   display: flex;
   flex-direction: column;

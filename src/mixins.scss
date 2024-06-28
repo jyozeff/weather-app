@@ -1,0 +1,5 @@
+@mixin for-tablet-up {
+  @media (min-width: 850px) {
+    @content;
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./WeatherForm.scss";
 
 interface WeatherFormProps {
   city: string;

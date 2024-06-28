@@ -3,6 +3,7 @@ import { geocode, getWeather } from "../services/weather";
 import WeatherDisplay from "../components/WeatherDisplay";
 import WeatherForm from "../components/WeatherForm";
 import { useDebouncedCallback } from "use-debounce";
+import "./Main.scss";
 
 const WeatherContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");

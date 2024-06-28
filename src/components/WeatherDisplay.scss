@@ -1,3 +1,6 @@
+@import "../variables";
+@import "../mixins";
+
 .weather-display {
   background-color: lighten($background-color, 5%);
   padding: 20px;

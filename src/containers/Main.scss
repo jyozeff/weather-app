@@ -1,10 +1,12 @@
+@import "../mixins";
+
 .main {
   h1 {
     font-size: 24px;
     margin-bottom: 20px;
 
     @include for-tablet-up {
-      font-size: 32px;
+      font-size: 44px;
     }
   }
 }
