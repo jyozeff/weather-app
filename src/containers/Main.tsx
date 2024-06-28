@@ -53,7 +53,7 @@ const WeatherContainer: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="main">
       <h1>Weather App</h1>
       <WeatherForm
         city={city}
@@ -67,7 +67,7 @@ const WeatherContainer: React.FC = () => {
       />
       {error && <p className="error">{error}</p>}
       {weather && <WeatherDisplay weather={weather} />}
-    </>
+    </div>
   );
 };
 

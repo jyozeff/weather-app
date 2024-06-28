@@ -5,7 +5,7 @@ interface WeatherDisplayProps {
 }
 
 const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weather }) => (
-  <div className="weather-info">
+  <div className="weather-display">
     <h2>Weather Report</h2>
     <p>Temperature: {weather.temp}°C</p>
     {/* <p>Feels like: {weather.main.feels_like}°C</p>
