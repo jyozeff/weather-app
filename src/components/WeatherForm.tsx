@@ -28,19 +28,13 @@ const WeatherForm: React.FC<WeatherFormProps> = ({
         required
       />
       {locations.length > 0 && (
-        <select
-          onChange={(e) => {
-            const selectedLocation = locations[parseInt(e.target.value)];
-            onLocationSelect(selectedLocation);
-          }}
-        >
-          <option value="">Select a location</option>
+        <ul>
           {locations.map((location, index) => (
-            <option key={index} value={index}>
+            <li key={index} onClick={() => onLocationSelect(location)}>
               {location.name}, {location.state || ""} {location.country}
-            </option>
+            </li>
           ))}
-        </select>
+        </ul>
       )}
       <button type="submit">Get Weather</button>
     </form>
