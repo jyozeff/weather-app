@@ -1,0 +1,39 @@
+.App {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+
+  form {
+    margin-bottom: 20px;
+
+    input {
+      padding: 10px;
+      font-size: 16px;
+      width: 60%;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .weather-info {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 5px;
+  }
+
+  .error {
+    color: red;
+  }
+}
