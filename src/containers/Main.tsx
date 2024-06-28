@@ -8,7 +8,8 @@ import "./Main.scss";
 const WeatherContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [locations, setLocations] = useState<GeocodeResponse[]>([]);
-  const [selectedLocation, setSelectedLocation] = useState<GeocodeResponse>();
+  const [selectedLocation, setSelectedLocation] =
+    useState<GeocodeResponse | null>(null);
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
 
@@ -27,6 +28,7 @@ const WeatherContainer: React.FC = () => {
       }
     } else {
       setLocations([]);
+      setSelectedLocation(null);
       setWeather(null);
       setError("");
     }
@@ -42,10 +44,11 @@ const WeatherContainer: React.FC = () => {
 
     try {
       const weatherReport = await getWeather(location.lat, location.lon);
-      setWeather(weatherReport?.current || null);
       setSelectedLocation(location);
+      setWeather(weatherReport?.current || null);
       setError("");
     } catch (err) {
+      setSelectedLocation(null);
       setWeather(null);
       setError("Failed to fetch weather data");
     }
@@ -62,7 +65,7 @@ const WeatherContainer: React.FC = () => {
       />
       {error && <p className="error">{error}</p>}
       {weather && selectedLocation && (
-        <WeatherDisplay weather={weather} city={selectedLocation?.name} />
+        <WeatherDisplay weather={weather} city={selectedLocation.name} />
       )}
     </div>
   );
