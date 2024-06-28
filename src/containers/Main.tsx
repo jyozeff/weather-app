@@ -1,35 +1,67 @@
 import React, { useState } from "react";
+import { geocode, getWeather } from "../services/weather";
 import WeatherDisplay from "../components/WeatherDisplay";
 import WeatherForm from "../components/WeatherForm";
-import { getWeather, geocode } from "../services/weather";
 
-const MainContainer: React.FC = () => {
+const WeatherContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");
+  const [locations, setLocations] = useState<GeocodeResponse[]>([]);
+  const [selectedLocation, setSelectedLocation] =
+    useState<GeocodeResponse | null>(null);
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
 
+  const handleCityChange = async (newCity: string) => {
+    setCity(newCity);
+    if (newCity.length > 2) {
+      try {
+        const fetchedLocations = await geocode(newCity);
+        setLocations(fetchedLocations);
+      } catch (err) {
+        setError("Failed to fetch locations");
+      }
+    } else {
+      setLocations([]);
+    }
+  };
+
+  const handleLocationSelect = (location: GeocodeResponse) => {
+    setSelectedLocation(location);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      // TODO disambiguate city by adding country, state field
-      const [{ lat, lon }] = await geocode(city); // only take the first element
-      const response = await getWeather(lat, lon);
-      setWeather(response.current);
-      setError("");
-    } catch (err) {
-      setWeather(null);
-      setError("City not found. Please try again.");
+    if (selectedLocation) {
+      try {
+        const weatherReport = await getWeather(
+          selectedLocation.lat,
+          selectedLocation.lon
+        );
+        setWeather(weatherReport?.current || null);
+        setError("");
+      } catch (err) {
+        setWeather(null);
+        setError("Failed to fetch weather data");
+      }
+    } else {
+      setError("Please select a location");
     }
   };
 
   return (
     <>
       <h1>Weather App</h1>
-      <WeatherForm city={city} onCityChange={setCity} onSubmit={handleSubmit} />
+      <WeatherForm
+        city={city}
+        locations={locations}
+        onCityChange={handleCityChange}
+        onLocationSelect={handleLocationSelect}
+        onSubmit={handleSubmit}
+      />
       {error && <p className="error">{error}</p>}
       {weather && <WeatherDisplay weather={weather} />}
     </>
   );
 };
 
-export default MainContainer;
+export default WeatherContainer;
