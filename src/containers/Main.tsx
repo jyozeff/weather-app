@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { API_KEY, BASE_URL } from "../config/api";
 import WeatherDisplay from "../components/WeatherDisplay";
 import WeatherForm from "../components/WeatherForm";
-import { WeatherData } from "../types/weather";
+import { getWeather } from "../services/weather";
 
 const MainContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");
@@ -12,14 +11,8 @@ const MainContainer: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `${BASE_URL}?q=${city}&appid=${API_KEY}&units=metric`
-      );
-      if (!response.ok) {
-        throw new Error("City not found");
-      }
-      const data: WeatherData = await response.json();
-      setWeather(data);
+      const response = await getWeather(city);
+      setWeather(response.data[0]); // only take the first
       setError("");
     } catch (err) {
       setWeather(null);
