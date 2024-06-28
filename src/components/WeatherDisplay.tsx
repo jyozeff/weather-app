@@ -3,17 +3,30 @@ import "./WeatherDisplay.scss";
 
 interface WeatherDisplayProps {
   weather: WeatherData;
+  city?: string;
 }
 
-const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weather }) => (
+const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weather, city }) => (
   <div className="weather-display">
-    <h2>Weather Report</h2>
+    <h2>Weather in {city}</h2>
     <p>Temperature: {weather.temp}°C</p>
-    {/* <p>Feels like: {weather.main.feels_like}°C</p>
-    <p>Description: {weather.weather[0].description}</p>
-    <p>Humidity: {weather.main.humidity}%</p>
-    <p>Wind Speed: {weather.wind.speed} m/s</p> */}
+    <p>Feels like: {weather.feels_like}°C</p>
+    <p>Humidity: {weather.humidity}%</p>
+    <p>Wind Speed: {weather.wind_speed} m/s</p>
+    <p>UVI: {weather.uvi}</p>
+    <p>Pressure: {weather.pressure} millibars</p>
   </div>
 );
 
 export default WeatherDisplay;
+
+// dt: number;
+// sunrise: number;
+// sunset: number;
+// temp: number;
+// feels_like: number;
+// pressure: number;
+// clouds: number;
+// visibility: number;
+// wind_deg: number;
+// weather: Weather;

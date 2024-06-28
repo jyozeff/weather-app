@@ -15,26 +15,24 @@ const WeatherForm: React.FC<WeatherFormProps> = ({
   onLocationSelect,
 }) => (
   <div className="weather-form">
-    <form>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => {
-          onCityChange(e.target.value);
-        }}
-        placeholder="Enter city name"
-        required
-      />
-      {locations.length > 0 && (
-        <ul>
-          {locations.map((location, index) => (
-            <li key={index} onClick={() => onLocationSelect(location)}>
-              {location.name}, {location.state || ""} {location.country}
-            </li>
-          ))}
-        </ul>
-      )}
-    </form>
+    <input
+      type="text"
+      value={city}
+      onChange={(e) => {
+        onCityChange(e.target.value);
+      }}
+      placeholder="Enter city name"
+      required
+    />
+    {locations.length > 0 && (
+      <ul>
+        {locations.map((location, index) => (
+          <li key={index} onClick={() => onLocationSelect(location)}>
+            {location.name}, {location.state || ""} {location.country}
+          </li>
+        ))}
+      </ul>
+    )}
   </div>
 );
 

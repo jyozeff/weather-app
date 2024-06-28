@@ -5,10 +5,11 @@
   background-color: lighten($background-color, 5%);
   padding: 20px;
   border-radius: 5px;
+  margin-top: 50px;
 
   h2 {
     font-size: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
 
     @include for-tablet-up {
       font-size: 24px;
