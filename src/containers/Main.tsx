@@ -18,7 +18,7 @@ const WeatherContainer: React.FC = () => {
   }, 700);
 
   const handleCityChange = async (newCity: string) => {
-    if (newCity.length > 2) {
+    if (newCity.length > 1) {
       try {
         const fetchedLocations = await geocode(newCity);
         setLocations(fetchedLocations);
