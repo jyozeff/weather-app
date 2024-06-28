@@ -6,7 +6,6 @@ interface WeatherFormProps {
   locations: GeocodeResponse[];
   onCityChange: (city: string) => void;
   onLocationSelect: (location: GeocodeResponse) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
 const WeatherForm: React.FC<WeatherFormProps> = ({
@@ -14,10 +13,9 @@ const WeatherForm: React.FC<WeatherFormProps> = ({
   locations,
   onCityChange,
   onLocationSelect,
-  onSubmit,
 }) => (
   <div className="weather-form">
-    <form onSubmit={onSubmit}>
+    <form>
       <input
         type="text"
         value={city}
@@ -36,7 +34,6 @@ const WeatherForm: React.FC<WeatherFormProps> = ({
           ))}
         </ul>
       )}
-      <button type="submit">Get Weather</button>
     </form>
   </div>
 );

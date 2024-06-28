@@ -17,12 +17,6 @@
     font-size: 16px;
     border: none;
     border: 1px solid #ccc;
-
-    // @include for-tablet-up {
-    //   width: 60%;
-    //   margin-bottom: 0;
-    //   margin-right: 10px;
-    // }
   }
 
   ul {
@@ -40,26 +34,6 @@
       &:hover {
         background-color: darken(white, 10%);
       }
-    }
-  }
-
-  button {
-    margin-top: 40px;
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: $primary-color;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-
-    // @include for-tablet-up {
-    //   width: auto;
-    // }
-
-    &:hover {
-      background-color: darken($primary-color, 10%);
     }
   }
 }

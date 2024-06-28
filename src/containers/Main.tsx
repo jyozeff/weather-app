@@ -8,14 +8,12 @@ import "./Main.scss";
 const WeatherContainer: React.FC = () => {
   const [city, setCity] = useState<string>("");
   const [locations, setLocations] = useState<GeocodeResponse[]>([]);
-  const [selectedLocation, setSelectedLocation] =
-    useState<GeocodeResponse | null>(null);
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string>("");
 
   const handleCityChangeDebounced = useDebouncedCallback((value: string) => {
     handleCityChange(value);
-  }, 1000);
+  }, 700);
 
   const handleCityChange = async (newCity: string) => {
     if (newCity.length > 2) {
@@ -27,29 +25,25 @@ const WeatherContainer: React.FC = () => {
       }
     } else {
       setLocations([]);
+      setWeather(null);
     }
   };
 
-  const handleLocationSelect = (location: GeocodeResponse) => {
-    setSelectedLocation(location);
+  const _handleCityChange = (s: string) => {
+    setCity(s);
+    handleCityChangeDebounced(s);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (selectedLocation) {
-      try {
-        const weatherReport = await getWeather(
-          selectedLocation.lat,
-          selectedLocation.lon
-        );
-        setWeather(weatherReport?.current || null);
-        setError("");
-      } catch (err) {
-        setWeather(null);
-        setError("Failed to fetch weather data");
-      }
-    } else {
-      setError("Please select a location");
+  const handleLocationSelect = async (location: GeocodeResponse) => {
+    setLocations([]);
+
+    try {
+      const weatherReport = await getWeather(location.lat, location.lon);
+      setWeather(weatherReport?.current || null);
+      setError("");
+    } catch (err) {
+      setWeather(null);
+      setError("Failed to fetch weather data");
     }
   };
 
@@ -59,12 +53,8 @@ const WeatherContainer: React.FC = () => {
       <WeatherForm
         city={city}
         locations={locations}
-        onCityChange={(s: string) => {
-          setCity(s);
-          handleCityChangeDebounced(s);
-        }}
+        onCityChange={_handleCityChange}
         onLocationSelect={handleLocationSelect}
-        onSubmit={handleSubmit}
       />
       {error && <p className="error">{error}</p>}
       {weather && <WeatherDisplay weather={weather} />}
