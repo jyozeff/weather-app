@@ -27,5 +27,14 @@ interface WeatherReport {
   lon: number;
   timezone: string;
   timezone_offset: number;
-  data: WeatherData[];
+  current: WeatherData;
+}
+
+interface GeocodeResponse {
+  name: string;
+  local_names: { en: string };
+  country: string;
+  state: string;
+  lat: number;
+  lon: number;
 }
