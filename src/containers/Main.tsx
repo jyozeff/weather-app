@@ -21,12 +21,14 @@ const WeatherContainer: React.FC = () => {
       try {
         const fetchedLocations = await geocode(newCity);
         setLocations(fetchedLocations);
+        setError("");
       } catch (err) {
         setError("Failed to fetch locations");
       }
     } else {
       setLocations([]);
       setWeather(null);
+      setError("");
     }
   };
 
