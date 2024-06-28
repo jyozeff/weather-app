@@ -19,14 +19,3 @@ const WeatherDisplay: React.FC<WeatherDisplayProps> = ({ weather, city }) => (
 );
 
 export default WeatherDisplay;
-
-// dt: number;
-// sunrise: number;
-// sunset: number;
-// temp: number;
-// feels_like: number;
-// pressure: number;
-// clouds: number;
-// visibility: number;
-// wind_deg: number;
-// weather: Weather;
