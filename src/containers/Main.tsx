@@ -62,6 +62,7 @@ const WeatherContainer: React.FC = () => {
         locations={locations}
         onCityChange={_handleCityChange}
         onLocationSelect={handleLocationSelect}
+        onSubmit={() => _handleCityChange(city)}
       />
       {error && <p className="error">{error}</p>}
       {weather && selectedLocation && (
