@@ -5,7 +5,7 @@ import WeatherForm from "../components/WeatherForm";
 import { useDebouncedCallback } from "use-debounce";
 import "./Main.scss";
 
-const WeatherContainer: React.FC = () => {
+const Main = () => {
   const [city, setCity] = useState<string>("");
   const [locations, setLocations] = useState<GeocodeResponse[]>([]);
   const [selectedLocation, setSelectedLocation] =
@@ -75,4 +75,4 @@ const WeatherContainer: React.FC = () => {
   );
 };
 
-export default WeatherContainer;
+export default Main;
