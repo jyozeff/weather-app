@@ -2,7 +2,7 @@
 @import "../mixins";
 
 .weather-display {
-  background-color: lighten($background-color, 5%);
+  background-color: lighten($secondary-color, 30%);
   padding: 20px;
   border-radius: 5px;
   margin-top: 50px;
