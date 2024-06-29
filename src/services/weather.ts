@@ -3,6 +3,7 @@ import {
   WEATHER_BASE_URL,
   GEOCODE_BASE_URL,
 } from "../config/api";
+import constants from "../config/constants";
 // import { getWeatherTestData, geocodeTestData } from "./testData";
 
 async function handleResponse(res: Response) {
@@ -19,7 +20,7 @@ export async function getWeather(
   latitue: number,
   longitue: number
 ): Promise<WeatherReport> {
-  console.log("API call to OpenWeather!");
+  // console.log("Calling OpenWeather API!");
   const res = await fetch(
     `${WEATHER_BASE_URL}?lat=${latitue}&lon=${longitue}&units=metric&appid=${WEATHER_API_KEY}`
   );
@@ -31,10 +32,9 @@ export async function getWeather(
 }
 
 export async function geocode(city: string): Promise<GeocodeResponse[]> {
-  // TODO uncomment to make actual api calls
-  console.log("API call to OpenWeather!");
+  // console.log("Calling OpenWeather API!");
   const res = await fetch(
-    `${GEOCODE_BASE_URL}?q=${city}&appid=${WEATHER_API_KEY}`
+    `${GEOCODE_BASE_URL}?q=${city}&limit=${constants.dropdownMaxLength}&appid=${WEATHER_API_KEY}`
   );
 
   return await handleResponse(res);

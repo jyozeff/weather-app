@@ -65,7 +65,10 @@ const WeatherContainer: React.FC = () => {
       />
       {error && <p className="error">{error}</p>}
       {weather && selectedLocation && (
-        <WeatherDisplay weather={weather} city={selectedLocation.name} />
+        <WeatherDisplay
+          weather={weather}
+          city={`${selectedLocation.name}, ${selectedLocation.state} ${selectedLocation.country}`}
+        />
       )}
     </div>
   );
